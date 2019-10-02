@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.1.0-dev
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Okt 2019 pada 06.22
--- Versi server: 10.1.36-MariaDB
--- Versi PHP: 7.2.10
+-- Generation Time: Oct 02, 2019 at 02:36 PM
+-- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
+-- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -37,7 +37,7 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `article`
+-- Table structure for table `article`
 --
 
 CREATE TABLE `article` (
@@ -53,7 +53,7 @@ CREATE TABLE `article` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `company_profile`
+-- Table structure for table `company_profile`
 --
 
 CREATE TABLE `company_profile` (
@@ -67,7 +67,7 @@ CREATE TABLE `company_profile` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `customer`
+-- Table structure for table `customer`
 --
 
 CREATE TABLE `customer` (
@@ -77,21 +77,26 @@ CREATE TABLE `customer` (
   `email_customer` varchar(50) NOT NULL,
   `password_customer` varchar(255) NOT NULL,
   `address_customer` varchar(255) NOT NULL,
-  `date_join_customer` varchar(24) NOT NULL
+  `date_join_customer` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `customer`
+-- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`id_customer`, `name_customer`, `phone_customer`, `email_customer`, `password_customer`, `address_customer`, `date_join_customer`) VALUES
-(1, 'haydar', '081932352247', 'hardabell@gmail.com', 'lostsaga12', 'bekasi', '9/27/2019'),
-(2, 'kapten', '325235', 'haydar@gmail.com', 'lostsaga12', 'beji', '9/30/2019');
+(1, 'haydar', '081932352247', 'hardabell@gmail.com', 'lostsaga12', 'bekasi', '0000-00-00 00:00:00'),
+(2, 'kapten', '325235', 'haydar@gmail.com', 'lostsaga12', 'beji', '0000-00-00 00:00:00'),
+(5, 'wawa memek', '12988', 'awe@awe.cor', '123', 'Lambir Gang', '2019-10-02 05:44:31'),
+(6, 'wawa memek', '12988', 'awe@awe.col', '123', 'Lambir Gang', '2019-10-02 05:52:21'),
+(7, 'ajsk', '4249', 'ywu.@akek.sk', '123qwe', 'gahah', '2019-10-02 06:05:47'),
+(8, 'ahsga', '1243154', 'tuyaj@ahwha.sh', '123qwe', 'guhas', '2019-10-02 06:13:04'),
+(9, 'kntl', '08973494', 'kontol@uhuy.com', 'kntl', 'bwh perut', '2019-10-02 07:31:48');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `detail_transaction`
+-- Table structure for table `detail_transaction`
 --
 
 CREATE TABLE `detail_transaction` (
@@ -102,16 +107,17 @@ CREATE TABLE `detail_transaction` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `detail_transaction`
+-- Dumping data for table `detail_transaction`
 --
 
 INSERT INTO `detail_transaction` (`id_transaction`, `id_product`, `quantity`, `price`) VALUES
-(1, 1, 1, 15000);
+(1, 1, 1, 15000),
+(2, 1, 2, 30000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_transaction`
+-- Table structure for table `master_transaction`
 --
 
 CREATE TABLE `master_transaction` (
@@ -123,16 +129,18 @@ CREATE TABLE `master_transaction` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `master_transaction`
+-- Dumping data for table `master_transaction`
 --
 
 INSERT INTO `master_transaction` (`id_transaction`, `id_customer`, `transaction_total`, `date_transaction`, `time_transaction`) VALUES
-(1, 1, 15000, '9/30/2019', '00:00:16');
+(0, 1, 15000, '31-01-12', '12:17:34'),
+(1, 1, 15000, '9/30/2019', '00:00:16'),
+(2, 2, 10000, '18123937173', '12:17:34');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -147,7 +155,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id_product`, `name_product`, `description_product`, `price_unit`, `unit`, `id_category`, `rating`, `image`) VALUES
@@ -157,7 +165,7 @@ INSERT INTO `products` (`id_product`, `name_product`, `description_product`, `pr
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `product_category`
+-- Table structure for table `product_category`
 --
 
 CREATE TABLE `product_category` (
@@ -167,7 +175,7 @@ CREATE TABLE `product_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `product_category`
+-- Dumping data for table `product_category`
 --
 
 INSERT INTO `product_category` (`id_category`, `name_category`, `type`) VALUES
@@ -176,7 +184,7 @@ INSERT INTO `product_category` (`id_category`, `name_category`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `seller`
+-- Table structure for table `seller`
 --
 
 CREATE TABLE `seller` (
@@ -194,7 +202,7 @@ CREATE TABLE `seller` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `seller`
+-- Dumping data for table `seller`
 --
 
 INSERT INTO `seller` (`id_seller`, `name_seller`, `address_seller`, `zip_code`, `phone_seller`, `email_seller`, `password_seller`, `date_join_seller`, `id_product`, `latitude`, `longitude`) VALUES
@@ -206,141 +214,141 @@ INSERT INTO `seller` (`id_seller`, `name_seller`, `address_seller`, `zip_code`, 
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indeks untuk tabel `article`
+-- Indexes for table `article`
 --
 ALTER TABLE `article`
   ADD PRIMARY KEY (`id_article`),
   ADD KEY `id_admin` (`id_admin`);
 
 --
--- Indeks untuk tabel `company_profile`
+-- Indexes for table `company_profile`
 --
 ALTER TABLE `company_profile`
   ADD PRIMARY KEY (`id_content`);
 
 --
--- Indeks untuk tabel `customer`
+-- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id_customer`);
 
 --
--- Indeks untuk tabel `detail_transaction`
+-- Indexes for table `detail_transaction`
 --
 ALTER TABLE `detail_transaction`
   ADD KEY `id_transaction` (`id_transaction`),
   ADD KEY `id_product` (`id_product`);
 
 --
--- Indeks untuk tabel `master_transaction`
+-- Indexes for table `master_transaction`
 --
 ALTER TABLE `master_transaction`
   ADD PRIMARY KEY (`id_transaction`),
   ADD KEY `id_customer` (`id_customer`);
 
 --
--- Indeks untuk tabel `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id_product`),
   ADD KEY `id_category` (`id_category`);
 
 --
--- Indeks untuk tabel `product_category`
+-- Indexes for table `product_category`
 --
 ALTER TABLE `product_category`
   ADD PRIMARY KEY (`id_category`);
 
 --
--- Indeks untuk tabel `seller`
+-- Indexes for table `seller`
 --
 ALTER TABLE `seller`
   ADD PRIMARY KEY (`id_seller`),
   ADD KEY `id_product` (`id_product`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` int(6) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `article`
+-- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
   MODIFY `id_article` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `company_profile`
+-- AUTO_INCREMENT for table `company_profile`
 --
 ALTER TABLE `company_profile`
   MODIFY `id_content` int(2) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `customer`
+-- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id_customer` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_customer` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id_product` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `product_category`
+-- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
   MODIFY `id_category` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `seller`
+-- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
   MODIFY `id_seller` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `article`
+-- Constraints for table `article`
 --
 ALTER TABLE `article`
   ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`);
 
 --
--- Ketidakleluasaan untuk tabel `detail_transaction`
+-- Constraints for table `detail_transaction`
 --
 ALTER TABLE `detail_transaction`
   ADD CONSTRAINT `detail_transaction_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`),
   ADD CONSTRAINT `detail_transaction_ibfk_2` FOREIGN KEY (`id_transaction`) REFERENCES `master_transaction` (`id_transaction`);
 
 --
--- Ketidakleluasaan untuk tabel `master_transaction`
+-- Constraints for table `master_transaction`
 --
 ALTER TABLE `master_transaction`
   ADD CONSTRAINT `master_transaction_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id_customer`);
 
 --
--- Ketidakleluasaan untuk tabel `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `product_category` (`id_category`);
 
 --
--- Ketidakleluasaan untuk tabel `seller`
+-- Constraints for table `seller`
 --
 ALTER TABLE `seller`
   ADD CONSTRAINT `seller_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`);
@@ -349,3 +357,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

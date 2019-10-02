@@ -1,6 +1,6 @@
 <?php
 
-	$gmail = $_POST['gmail'];
+	$gmail = $_POST['email'];
 	require_once('connection.php');
 	
 	//Membuat SQL Query
@@ -26,7 +26,7 @@
 	}
 	
 	//Menampilkan Array dalam Format JSON
-	echo json_encode(array('result'=>$result));
+	echo json_encode(array('hasil'=>$result));
 	
 	mysqli_close($con);
 ?>

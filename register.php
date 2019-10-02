@@ -17,7 +17,7 @@ class Register
 	public function does_user_exist($name,$mail,$number,$add,$pass)
 	{
 		// does user already exist or not
-		$query = "SELECT * FROM customer WHERE email='$mail'";
+		$query = "SELECT * FROM customer WHERE email_customer='$mail'";
 		$result=mysqli_query($this->connection,$query);
 		if(mysqli_num_rows($result)>0){
 			$json['status']=400;

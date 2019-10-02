@@ -1,43 +1,53 @@
-<?php 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "dbgeobak";
+<?php
 
-try {
-    	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
-catch(PDOException $e)
+include('con.php');
+header('Content-Type: application/json');
+
+/**
+ * User Registeration
+ */
+class Login
+{
+    private $db;
+    private $connection;
+
+    function __construct()
     {
-    	die("wadoo config error");
+        //constructor call
+        $this->db = new Connection();
+        $this->connection = $this->db->get_connection();
     }
 
+    public function check_user_exist($mail, $pass)
+    {
+        // does user already exist or not
+        $query = "SELECT * FROM customer WHERE email_customer='$mail' AND password_customer='$pass'";
+        $result = mysqli_query($this->connection, $query);
+        if (mysqli_num_rows($result) > 0) {
+            $json['status'] = 200;
+            $json['message'] = 'Login success!';
+            $json['email'] = $mail;
+            echo json_encode($json);
+            mysqli_close($this->connection);
+        } else {
+                $json['status'] = 400;
+                $json['message'] = "Email & Password not match";
+            echo json_encode($json);
+            mysqli_close($this->connection);
+        }
+    }
+}
 
-	 // Check whether username or password is set from android	
-     if(isset($_POST['username']) && isset($_POST['password']))
-     {
-		  // Innitialize Variable
-		  $result='';
-	   	  $username = $_POST['username'];
-        	  $password = $_POST['password'];
-		  
-		  // Query database for row exist or not
-          $sql = 'SELECT * FROM customer WHERE  email_customer = :username AND password_customer = :password';
-          $stmt = $conn->prepare($sql);
-          $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-          $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-          $stmt->execute();
-          if($stmt->rowCount())
-          {
-			 $result="true";	
-          }  
-          elseif(!$stmt->rowCount())
-          {
-			  	$result="false";
-          }
-		  
-		  // send result back to android
-   		  echo $result;
-  	}
-?>
+$register = new Login();
+if (isset($_POST['email'], $_POST['password'])) {
+    $mail = $_POST['email'];
+    $pass = $_POST['password'];
+    if (!empty($mail) && !empty($pass)) {
+        $register->check_user_exist($mail, $pass);
+    } else {
+        $json['status'] = 100;
+        $json['message'] = 'You must fill all the fields';
+        echo json_encode($json);
+    }
+}
+

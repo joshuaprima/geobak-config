@@ -14,9 +14,13 @@
 		
 		//Memasukkan Nama produk, penjual, harga kedalam Array Kosong yang telah dibuat 
 		array_push($result,array(
-		"productname"=>$row['name_product'],
-		"sellername"=>$row['name_seller'],
-		"unitprice"=>$row['price_unit']
+            "name_product"=>$row['name_product'],
+            "name_seller"=>$row['name_seller'],
+            "price_unit"=>$row['price_unit'],
+            "rating" => $row["rating"],
+            "latitude" => $row["latitude"],
+            "longitude" => $row["longitude"],
+            "image" => $row["image"]
 		));
 	}
 	
