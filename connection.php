@@ -1,7 +1,7 @@
 <?php
 	define('HOST','localhost');
- 	define('USER','root');
-	define('PASS','');
+ 	define('USER','fuckuphpmyadmin');
+	define('PASS','fuckpass');
  	define('DB','dbgeobak');
  
  //membuat koneksi dengan database
